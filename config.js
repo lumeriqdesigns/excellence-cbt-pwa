@@ -18,7 +18,7 @@ window.EXCELLENCE_CONFIG = {
 
   // ---------- Merit AI via Groq ----------
   AI_API_URL: "https://api.groq.com/openai/v1/chat/completions",
-  AI_API_KEY: "",
+  AI_API_KEY: "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",
   AI_MODEL: "openai/gpt-oss-20b",
   AI_FREE_DAILY_LIMIT: 3,
   AI_PREMIUM_DAILY_LIMIT: 40
