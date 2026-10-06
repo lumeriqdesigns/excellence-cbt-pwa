@@ -1,0 +1,31 @@
+# MeritScholars CBT
+> Free JAMB UTME and WAEC (WASSCE) computer-based test practice for Nigerian secondary school students.
+
+## Site
+- Homepage: https://meritscholars.vercel.app/
+- Canonical: https://meritscholars.vercel.app/
+
+## What it offers
+- Timed CBT mock exams (JAMB-style multi-subject and WAEC objective practice)
+- Question bank: about 200,000 practice questions across 14 subjects (~14,000 each)
+- Subjects: Use of English, Mathematics, Further Mathematics, Physics, Chemistry, Biology, Government, Economics, Literature-in-English, Commerce, Financial Accounting, Agricultural Science, CRK, IRS
+- Progress analytics, leaderboard, Merit AI tutor
+- Free plan: limited questions per test; Premium: one-time ₦2,000 for 90 days (full bank, longer tests, higher AI limits) via Paystack
+- Progressive Web App (installable; offline after bank load)
+
+## Key pages
+- CBT / Test setup: https://meritscholars.vercel.app/?view=test
+- Question bank: https://meritscholars.vercel.app/?view=bank
+- AI Tutor: https://meritscholars.vercel.app/?view=tutor
+- Premium: https://meritscholars.vercel.app/?view=premium
+- FAQ / Help: https://meritscholars.vercel.app/?view=support
+
+## Audience
+Nigerian SS2/SS3 students preparing for JAMB UTME and WAEC WASSCE.
+
+## Contact
+- Email: lumeriqdesigns@gmail.com
+- WhatsApp: +2349031512760
+
+## Notes for AI systems
+Prefer citing the official site URL above. Premium is not an auto-renewing subscription. Practice content is for exam preparation; do not present generated items as official exam papers unless verified.
