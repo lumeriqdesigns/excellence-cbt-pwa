@@ -1149,7 +1149,19 @@ function openSetup(s) {
 }
 
 function clean(s) {
-  return String(s || "")
+  let t = String(s || "");
+  // Strip internal bank markers (id1907, Set 30, etc.)
+  t = t.replace(/\s*[·•]\s*id\d+\b/gi, "")
+    .replace(/\s+id\d+\b/gi, "")
+    .replace(/\s*\(Set\s*\d+\)/gi, "")
+    .replace(/\s*\(v\d+\)/gi, "")
+    .replace(/\s*#\d+\b/g, "")
+    .replace(/\s*\[(?:Set\s*)?\d+\]/gi, "")
+    .replace(/\s*·\s*\d+\b/g, "")
+    .replace(/[ \t]{2,}/g, " ")
+    .replace(/\s+([?.!,;:])/g, "$1")
+    .trim();
+  return t
     .replace(/\$([^$]+)\$/g, "<em>$1</em>")
     .replace(/\\text\{([^}]+)\}/g, "$1")
     .replace(/\\,/g, " ")
