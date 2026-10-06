@@ -975,28 +975,65 @@ function shuffle(a) {
   return b;
 }
 
+/** Stable unique key — prefer record_id so similar stems never collide */
 function qKey(q) {
-  return (q.subject || "") + "||" + String(q.question_text || "").slice(0, 160);
+  if (!q) return "";
+  if (q.record_id) return String(q.record_id);
+  const stem = String(q.question_text || "").replace(/\s+/g, " ").trim().toLowerCase();
+  return (q.subject || "") + "||" + stem + "||" + String(q.correct_option || "");
 }
+
+function seenStorageKey() {
+  // Separate history so free/premium progression do not fight each other
+  return isPremium() ? "merit_seen_q_premium" : "merit_seen_q_free";
+}
+
 function getSeenKeys() {
-  try { return JSON.parse(localStorage.getItem("merit_seen_q") || "[]"); } catch { return []; }
+  try { return JSON.parse(localStorage.getItem(seenStorageKey()) || "[]"); } catch { return []; }
 }
+
 function markSeen(quizArr) {
   const set = new Set(getSeenKeys());
   (quizArr || []).forEach(q => set.add(qKey(q)));
   let seen = [...set];
-  if (seen.length > 8000) seen = seen.slice(-6000);
-  localStorage.setItem("merit_seen_q", JSON.stringify(seen));
+  // Premium can remember far more; free pool is smaller
+  const maxKeep = isPremium() ? 80000 : 5000;
+  const trimTo = isPremium() ? 60000 : 4000;
+  if (seen.length > maxKeep) seen = seen.slice(-trimTo);
+  localStorage.setItem(seenStorageKey(), JSON.stringify(seen));
 }
+
+/**
+ * Pick unique questions. Never repeat until every item in this pool was used,
+ * then reset seen only for keys in this pool so a new cycle can start cleanly.
+ */
 function pickQuiz(pool, limit) {
+  if (!pool || !pool.length) return [];
+  limit = Math.min(Math.max(1, limit || 1), pool.length);
+
+  // Deduplicate pool itself (same record / same stem)
+  const uniq = [];
+  const inPool = new Set();
+  for (const q of pool) {
+    const k = qKey(q);
+    if (!k || inPool.has(k)) continue;
+    inPool.add(k);
+    uniq.push(q);
+  }
+  if (!uniq.length) return [];
+
   const seen = new Set(getSeenKeys());
-  const fresh = pool.filter(q => !seen.has(qKey(q)));
-  let chosen;
-  if (fresh.length >= limit) chosen = shuffle(fresh).slice(0, limit);
-  else if (fresh.length > 0) {
-    const rest = shuffle(pool.filter(q => seen.has(qKey(q))));
-    chosen = shuffle(fresh).concat(rest).slice(0, Math.min(limit, pool.length));
-  } else chosen = shuffle(pool).slice(0, Math.min(limit, pool.length));
+  let fresh = uniq.filter(q => !seen.has(qKey(q)));
+
+  // Pool fully used → clear these keys from seen and start a new cycle (no mid-cycle repeats)
+  if (fresh.length < limit) {
+    const poolKeys = new Set(uniq.map(qKey));
+    const kept = getSeenKeys().filter(k => !poolKeys.has(k));
+    localStorage.setItem(seenStorageKey(), JSON.stringify(kept));
+    fresh = uniq.slice();
+  }
+
+  const chosen = shuffle(fresh).slice(0, limit);
   markSeen(chosen);
   return chosen;
 }
