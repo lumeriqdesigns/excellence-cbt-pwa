@@ -1,0 +1,72 @@
+REPLACE QUESTION BANK ON GITHUB (file too big for website upload)
+=================================================================
+
+Problem
+-------
+questions-full.v2.1-200k.json is ~173MB uncompressed.
+GitHub blocks single files over 100MB. The website drag-drop also fails on large uploads.
+
+Solution we prepared
+--------------------
+Bank is SPLIT into 14 files under bank/ (~12MB each) + bank/index.json
+Total ~200,000 questions. App already loads bank/index.json then each subject file.
+
+Files to upload / push
+----------------------
+  bank/index.json
+  bank/agricultural-science.json
+  bank/biology.json
+  bank/chemistry.json
+  bank/commerce.json
+  bank/crk.json
+  bank/economics.json
+  bank/financial-accounting.json
+  bank/further-mathematics.json
+  bank/government.json
+  bank/irs.json
+  bank/literature-in-english.json
+  bank/mathematics.json
+  bank/physics.json
+  bank/use-of-english.json
+  questions-free.js   (small free sample)
+
+METHOD 1 — Git on your PC (best)
+--------------------------------
+1. Install Git: https://git-scm.com/downloads
+2. Open Terminal / Git Bash:
+
+   git clone https://github.com/lumeriqdesigns/excellence-pwa.git
+   cd excellence-pwa
+
+3. If the site files live inside excellence-pwa/ subfolder:
+   cd excellence-pwa
+
+4. Delete old bank folder, copy the new bank/ folder from
+   MeritScholars_Bank_200k_Split.zip into this folder.
+   Also copy questions-free.js
+
+5. Push:
+   git add bank questions-free.js
+   git commit -m "Update question bank to 200k v2.1 (split by subject)"
+   git push
+
+6. Vercel will redeploy automatically if the project is connected.
+
+METHOD 2 — GitHub Desktop
+-------------------------
+1. Install GitHub Desktop → clone excellence-pwa
+2. Replace bank/ and questions-free.js
+3. Commit → Push origin
+
+METHOD 3 — Upload one subject at a time on github.com
+-----------------------------------------------------
+If you cannot use Git, open the repo → bank/ folder → Upload files
+Upload 2–3 JSON files per commit (each ~12MB). Repeat until all 14 are up.
+Then upload bank/index.json and questions-free.js.
+
+DO NOT upload questions-full.v2.1-200k.json as one file.
+
+After deploy
+------------
+Hard-refresh the site (Ctrl+Shift+R).
+Premium users load the full bank; free users still max 15 questions/test.

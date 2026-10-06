@@ -1,0 +1,46 @@
+============================================================
+MeritScholars — CODES / KEYS YOU MUST UPDATE
+============================================================
+
+FILE: config.js   ← edit this before deploy
+------------------------------------------------------------
+| Setting              | Replace with                         |
+|----------------------|--------------------------------------|
+| SUPABASE_URL         | Project URL from Supabase → Settings → API |
+| SUPABASE_ANON_KEY    | anon public key (same page)          |
+| PAYSTACK_PUBLIC_KEY  | pk_test_... or pk_live_... from Paystack |
+| AI_API_KEY           | Groq or OpenAI API key               |
+| SUPPORT_EMAIL        | Your real support email (optional)   |
+| SUPPORT_WHATSAPP     | Your WhatsApp number (optional)      |
+
+Current placeholders (must change):
+  YOUR_SUPABASE_URL
+  YOUR_SUPABASE_ANON_KEY
+  YOUR_PAYSTACK_PUBLIC_KEY
+  YOUR_GROQ_OR_OPENAI_KEY
+
+------------------------------------------------------------
+SUPABASE DASHBOARD SETTINGS (not in code)
+------------------------------------------------------------
+1. Run supabase-schema.sql in SQL Editor
+2. Auth → Providers → Email → Confirm email = ON
+3. Auth → URL Configuration:
+     Site URL     = https://YOUR-VERCEL-DOMAIN
+     Redirect URLs = https://YOUR-VERCEL-DOMAIN/**
+4. Optional: Auth → SMTP for reliable delivery
+
+------------------------------------------------------------
+ALREADY UPDATED IN CODE (no action unless customising)
+------------------------------------------------------------
+  index.html     Login / signup UI + resend verification
+  app.js         Supabase auth, email verify messages, leaderboard sync
+  styles.css     Auth modal / tabs
+  supabase-schema.sql   profiles, attempts, leaderboard tables
+  SETUP_SUPABASE.txt    Step-by-step guide
+
+------------------------------------------------------------
+STUDENT FLOW
+------------------------------------------------------------
+  Create Account → email verification link → Log In → CBT / Bank / Progress
+  Premium: Paystack one-time ₦2,000 in Premium tab
+

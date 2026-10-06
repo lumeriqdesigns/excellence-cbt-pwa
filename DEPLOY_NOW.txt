@@ -1,0 +1,50 @@
+MeritScholars — Deploy to Vercel (do this now)
+==============================================
+
+Your GitHub account: lumeriqdesigns
+(We could not create the repo automatically — GitHub needs extra permission.)
+
+STEP 1 — Create the repo on GitHub
+----------------------------------
+1. Open https://github.com/new
+2. Repository name: meritscholars-cbt
+3. Public
+4. Create repository
+
+STEP 2 — Upload the app files
+-----------------------------
+1. Download MeritScholars_CBT_PWA.zip from this chat
+2. Unzip it — open the excellence-pwa folder
+3. On the new GitHub repo page: “uploading an existing file”
+4. Drag ALL files and folders inside excellence-pwa, including:
+     - index.html, app.js, styles.css, config.js
+     - questions-free.js, questions-full.json (optional if bank/ is present)
+     - bank/ folder (index.json + 14 subject JSON files)  ← important
+     - icons, logo, manifest.json, sw.js, vercel.json
+5. Commit changes
+
+STEP 3 — Deploy on Vercel
+-------------------------
+1. Open https://vercel.com/new
+2. Sign in with GitHub (lumeriqdesigns)
+3. Import meritscholars-cbt
+4. Framework: Other (or leave default)
+5. Root directory: ./  (default)
+6. Deploy
+
+Your live URL will look like:
+  https://meritscholars-cbt.vercel.app
+
+STEP 4 — Keys (after first deploy)
+----------------------------------
+Edit config.js in GitHub (or Vercel) with:
+  SUPABASE_URL, SUPABASE_ANON_KEY
+  PAYSTACK_PUBLIC_KEY
+  AI_API_KEY (optional)
+Then redeploy.
+
+In Supabase Auth → URL Configuration set Site URL to your Vercel URL.
+
+STEP 5 — Test
+-------------
+Open the Vercel link → wait for “140,000 questions” to load → try a mock.

@@ -1,0 +1,63 @@
+DEPLOY EXCELLENCE CBT TO VERCEL (FREE)
+=====================================
+
+You need:
+  • Free account at https://vercel.com
+  • The excellence-pwa folder (inside Excellence_CBT_PWA.zip)
+
+
+METHOD A – Easiest (Vercel Dashboard + GitHub)
+----------------------------------------------
+
+1. Create free accounts
+   - https://github.com  (if you don’t have one)
+   - https://vercel.com  → Sign up with GitHub
+
+2. Put the PWA on GitHub
+   a. On GitHub: click New repository
+   b. Name: excellence-cbt-pwa
+   c. Public → Create repository
+   d. Click “uploading an existing file”
+   e. Upload EVERYTHING inside the excellence-pwa folder
+      (index.html, sw.js, manifest.json, questions.js, icons, vercel.json, etc.)
+   f. Commit changes
+
+3. Import into Vercel
+   a. Go to https://vercel.com/new
+   b. Click “Import” next to your excellence-cbt-pwa repo
+   c. Leave settings as default (Framework: Other)
+   d. Click Deploy
+
+4. Wait about 1 minute
+   → Vercel gives you a link like:
+     https://excellence-cbt-pwa.vercel.app
+
+5. Share that link with students
+   On phone: open link → browser menu → “Add to Home screen”
+
+
+METHOD B – Vercel CLI (if you have Node.js)
+-------------------------------------------
+1. Open terminal in the excellence-pwa folder
+2. Run:
+     npx vercel login
+     npx vercel
+3. Follow the prompts (link to your Vercel account)
+4. Production deploy:
+     npx vercel --prod
+
+
+AFTER DEPLOY
+------------
+• Test the site on your phone
+• Install to home screen
+• Turn on airplane mode and confirm offline quiz still works
+• Add your Paystack public key in index.html and redeploy for real payments
+
+Demo premium code: EXCEL2026
+
+
+CUSTOM DOMAIN (optional)
+------------------------
+In Vercel project → Settings → Domains → add your domain
+(e.g. practice.yourschool.com)

@@ -1,0 +1,40 @@
+MeritScholars — Supabase + Email Verification Setup
+====================================================
+
+1) Create project
+   - Go to https://supabase.com → New project
+   - Wait until the database is ready
+
+2) Run SQL schema
+   - SQL Editor → New query
+   - Paste contents of supabase-schema.sql → Run
+
+3) Enable email confirmation
+   - Authentication → Providers → Email
+   - Enable "Confirm email" (ON)
+   - Authentication → URL Configuration
+   - Site URL = your Vercel URL  e.g. https://meritscholars.vercel.app
+   - Redirect URLs = https://meritscholars.vercel.app/**
+
+4) Copy API keys into config.js
+   - Settings → API
+   - Project URL  → SUPABASE_URL
+   - anon public  → SUPABASE_ANON_KEY
+
+5) (Optional) Custom SMTP for reliable email
+   - Project Settings → Authentication → SMTP
+   - Or use Resend / SendGrid SMTP so verification emails deliver
+
+6) Redeploy
+   - Upload updated excellence-pwa folder (with config.js filled) to GitHub/Vercel
+
+Student flow after this:
+  Create Account → check inbox → click confirm link → Log In → use app
+
+Files you must edit with real values:
+  - config.js   (SUPABASE_URL, SUPABASE_ANON_KEY, PAYSTACK, AI key)
+
+Files already prepared (no key needed):
+  - supabase-schema.sql
+  - app.js (auth + verification messaging)
+  - index.html (login/signup UI)

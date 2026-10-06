@@ -1,0 +1,25 @@
+MeritScholars question bank structure (200,000 questions)
+=========================================================
+
+Layout (do not use one 173MB file on GitHub):
+
+  bank/index.json          → map of subject → file path
+  bank/<subject>.json      → ~14,000 questions each (14 subjects)
+  questions-free.js        → small free sample for offline / free plan
+
+Load order (app.js → loadFullBank):
+  1. Fetch bank/index.json
+  2. Fetch all subject files in parallel
+  3. Merge into FULL_BANK (Premium only via activeBank())
+
+Free plan:
+  - Uses FREE_BANK from questions-free.js
+  - Max 15 questions per test
+
+Premium (after Paystack):
+  - Uses FULL_BANK (~200,000)
+  - Up to 50 questions per test
+
+Subjects: Agricultural Science, Biology, Chemistry, Commerce, CRK,
+Economics, Financial Accounting, Further Mathematics, Government,
+IRS, Literature-in-English, Mathematics, Physics, Use of English.
