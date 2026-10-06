@@ -1,4 +1,4 @@
-const CACHE = "meritscholars-v1";
+const CACHE = "meritscholars-v3-200k";
 const PRECACHE = [
   "./",
   "./index.html",
@@ -8,12 +8,14 @@ const PRECACHE = [
   "./manifest.json",
   "./questions-free.js",
   "./icon-192.png",
-  "./icon-512.png", "./logo.png"
+  "./icon-512.png",
+  "./logo.png"
 ];
-// questions-full.json is large — cache on first successful network fetch (not during install)
 
 self.addEventListener("install", (e) => {
-  e.waitUntil(caches.open(CACHE).then((c) => c.addAll(PRECACHE)).catch(() => {}));
+  e.waitUntil(
+    caches.open(CACHE).then((c) => c.addAll(PRECACHE)).catch(() => {})
+  );
   self.skipWaiting();
 });
 
@@ -21,31 +23,38 @@ self.addEventListener("activate", (e) => {
   e.waitUntil(
     caches.keys().then((keys) =>
       Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k)))
-    )
+    ).then(() => self.clients.claim())
   );
-  self.clients.claim();
 });
+
+function networkFirst(request) {
+  return fetch(request)
+    .then((res) => {
+      if (res && res.ok) {
+        const clone = res.clone();
+        caches.open(CACHE).then((c) => c.put(request, clone)).catch(() => {});
+      }
+      return res;
+    })
+    .catch(() => caches.match(request));
+}
 
 self.addEventListener("fetch", (e) => {
   const url = e.request.url;
-
-  // Network-first for the full question bank
-  if (url.includes("questions-full.json")) {
-    e.respondWith(
-      fetch(e.request)
-        .then((res) => {
-          if (res.ok) {
-            const clone = res.clone();
-            caches.open(CACHE).then((c) => c.put(e.request, clone));
-          }
-          return res;
-        })
-        .catch(() => caches.match(e.request))
-    );
+  // Always prefer network for app code + question bank so updates show quickly
+  if (
+    url.includes("/bank/") ||
+    url.includes("questions-free.js") ||
+    url.includes("questions-full.json") ||
+    url.includes("app.js") ||
+    url.includes("index.html") ||
+    url.includes("styles.css") ||
+    url.includes("config.js") ||
+    url.includes("sw.js")
+  ) {
+    e.respondWith(networkFirst(e.request));
     return;
   }
-
-  // Cache-first for app shell
   e.respondWith(
     caches.match(e.request).then((cached) => {
       if (cached) return cached;
