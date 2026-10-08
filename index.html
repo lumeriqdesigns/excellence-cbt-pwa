@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MeritScholars CBT — Smart WAEC & JAMB Practice</title>
+<meta name="description" content="Practice JAMB UTME and WAEC with 21,000+ unique questions. Premium CBT, AI tutor, analytics, and calculator.">
+<meta name="theme-color" content="#07111f">
+<link rel="canonical" href="https://meritscholars.vercel.app/">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/icon-192.png">
+<link rel="stylesheet" href="/app.css">
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-mark">M</div>
+      <div>
+        <strong>MeritScholars</strong>
+        <span>CBT Practice</span>
+      </div>
+    </div>
+    <nav>
+      <button type="button" class="nav active" data-view="home">⌂ <span>Dashboard</span></button>
+      <button type="button" class="nav" data-view="practice">▣ <span>Practice</span></button>
+      <button type="button" class="nav" data-view="subjects">◈ <span>Subjects</span></button>
+      <button type="button" class="nav" data-view="analytics">▤ <span>Analytics</span></button>
+      <button type="button" class="nav" data-view="tutor">✦ <span>AI Tutor</span></button>
+      <button type="button" class="nav" data-view="premium">★ <span>Premium</span></button>
+      <button type="button" class="nav" data-view="tools">⚒ <span>Tools</span></button>
+      <button type="button" class="nav" data-view="results">◒ <span>Results</span></button>
+    </nav>
+    <div class="side-note">
+      <b id="sidePlan">Free plan</b><br>
+      <span id="sideNoteText">15 questions per test · Upgrade for full bank (90 days).</span>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <button type="button" class="menu" id="menu" aria-label="Menu">☰</button>
+      <div class="crumb">Smart CBT Platform</div>
+      <div class="status" id="statusLine"><i></i> Loading bank…</div>
+    </header>
+
+    <section id="homeView" class="view">
+      <div class="hero">
+        <div>
+          <span class="eyebrow">WAEC • JAMB • SMART PRACTICE</span>
+          <h1>Practice smarter.<br><em>Score higher.</em></h1>
+          <p>
+            Timed CBT for Nigerian students — <strong id="heroCount">21,000+</strong> unique questions,
+            AI tutor, analytics, and exam tools on phone or desktop.
+          </p>
+          <div class="tools-row">
+            <button type="button" class="primary" id="startBtn">Start practice <span>→</span></button>
+            <button type="button" class="secondary" id="goPremiumBtn">Premium ₦2,000</button>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="mini-label">QUESTION BANK</div>
+          <div class="big-number" id="totalQuestions">—</div>
+          <div class="muted">unique questions available</div>
+          <div class="meter"><span id="meterFill" style="width:0%"></span></div>
+          <div class="tiny-row"><span>JAMB</span><span>WAEC</span><span>14 subjects</span></div>
+        </div>
+      </div>
+
+      <div class="section-head"><div><span class="eyebrow">QUICK START</span><h2>Choose your path</h2></div></div>
+      <div class="cards">
+        <button type="button" class="choice" data-exam="JAMB"><span class="choice-icon">J</span><b>JAMB Practice</b><small>UTME-style questions</small><span class="arrow">→</span></button>
+        <button type="button" class="choice" data-exam="WAEC"><span class="choice-icon">W</span><b>WAEC Practice</b><small>WASSCE revision</small><span class="arrow">→</span></button>
+        <button type="button" class="choice" data-exam=""><span class="choice-icon">A</span><b>All questions</b><small>Full unique bank</small><span class="arrow">→</span></button>
+      </div>
+
+      <div class="section-head" style="margin-top:40px">
+        <div><span class="eyebrow">UPGRADE</span><h2>Go Premium</h2></div>
+      </div>
+      <div class="home-premium" id="homePremiumCard">
+        <div class="home-premium-glow"></div>
+        <div class="home-premium-main">
+          <div class="home-premium-copy">
+            <span class="badge ok">ONE-TIME · 90 DAYS</span>
+            <h3>Unlock the full MeritScholars bank</h3>
+            <p>Practice without the free 15-question limit. Get the full unique bank, longer CBT sessions, more AI tutor access, and analytics — paid once with Paystack.</p>
+            <ul class="home-premium-list">
+              <li>21,000+ unique questions</li>
+              <li>Up to 50 questions per test</li>
+              <li>40 AI tutor messages / day</li>
+              <li>Smart non-repeat practice</li>
+            </ul>
+            <div class="home-premium-actions">
+              <button type="button" class="primary" id="homePayCta">Get Premium — ₦2,000 <span>→</span></button>
+              <button type="button" class="ghost-btn" id="homePayLearn">See all benefits</button>
+            </div>
+          </div>
+          <div class="home-premium-price">
+            <div class="mini-label" style="color:#9db0c7">PREMIUM</div>
+            <div class="home-price">₦2,000</div>
+            <div class="home-price-sub">for 90 days</div>
+            <div class="home-price-note">No auto-renewal. Renew only when you choose.</div>
+            <div class="home-price-pills">
+              <span>Full bank</span>
+              <span>AI ×40</span>
+              <span>Analytics</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="practiceView" class="view hidden">
+      <div class="section-head"><div><span class="eyebrow">PRACTICE ENGINE</span><h2>Build a test</h2></div>
+        <span class="badge" id="planBadge">FREE · max 15</span>
+      </div>
+      <div class="builder" id="builder">
+        <div class="control"><label>Exam</label>
+          <select id="exam"><option value="">Any exam</option><option>JAMB</option><option>WAEC</option></select>
+        </div>
+        <div class="control"><label>Subject</label><select id="subject"></select></div>
+        <div class="control"><label>Difficulty</label>
+          <select id="difficulty">
+            <option value="">Any</option>
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard" selected>Hard</option>
+          </select>
+        </div>
+        <div class="control"><label>Questions</label>
+          <select id="limit">
+            <option value="10">10</option>
+            <option value="15" selected>15</option>
+            <option value="20">20</option>
+            <option value="40">40</option>
+            <option value="50">50</option>
+          </select>
+        </div>
+        <div class="control full"><label>Topic <span>optional</span></label>
+          <select id="topic"><option value="">All topics</option></select>
+        </div>
+        <button type="button" class="primary build-btn" id="buildBtn">Load questions <span>→</span></button>
+      </div>
+      <div id="loader" class="loader hidden"><div class="spinner"></div> Selecting fresh questions…</div>
+      <div id="questionArea" class="hidden">
+        <div class="test-head">
+          <h3 id="testTitle">Practice <small id="testMeta"></small></h3>
+          <div class="progress-wrap">
+            <span id="progressLabel">0 / 0</span>
+            <div class="progress"><i id="progressBar" style="width:0%"></i></div>
+          </div>
+        </div>
+        <div class="test-layout">
+          <div class="question-card">
+            <div class="q-meta">
+              <span id="qExam">—</span>
+              <span id="qTopic">—</span>
+              <span id="qDiff">—</span>
+            </div>
+            <div class="question-text" id="qText"></div>
+            <div class="options" id="qOptions"></div>
+            <div class="actions">
+              <button type="button" class="secondary" id="prevBtn">← Previous</button>
+              <button type="button" class="primary" id="nextBtn">Next →</button>
+            </div>
+          </div>
+          <aside class="navigator">
+            <b>Navigator</b>
+            <small id="navHint">Tap a number to jump</small>
+            <div class="nav-grid" id="navGrid"></div>
+            <button type="button" class="primary build-btn" id="submitBtn" style="width:100%;margin-top:16px">Submit test</button>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section id="subjectsView" class="view hidden">
+      <div class="section-head"><div><span class="eyebrow">QUESTION BANK</span><h2>Subjects</h2></div></div>
+      <div id="subjectGrid" class="subject-grid"></div>
+    </section>
+
+    <section id="analyticsView" class="view hidden">
+      <div class="section-head"><div><span class="eyebrow">PROGRESS</span><h2>Analytics</h2></div></div>
+      <div class="grid-3" id="analyticsStats">
+        <div class="stat"><b id="aAttempts">0</b><span>Tests taken</span></div>
+        <div class="stat"><b id="aAvg">—</b><span>Average score</span></div>
+        <div class="stat"><b id="aBest">—</b><span>Best score</span></div>
+      </div>
+      <div class="panel" style="margin-top:16px">
+        <h3>Recent sessions</h3>
+        <p class="muted-sm">Scores stay on this device (and sync if backend is connected).</p>
+        <div style="overflow:auto">
+          <table class="table" id="analyticsTable">
+            <thead><tr><th>When</th><th>Subject</th><th>Score</th><th>%</th></tr></thead>
+            <tbody><tr><td colspan="4" class="muted-sm">No sessions yet.</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="panel">
+        <h3>Weak subjects</h3>
+        <div id="weakList" class="muted-sm">Complete a few tests to see weak areas.</div>
+      </div>
+    </section>
+
+    <section id="tutorView" class="view hidden">
+      <div class="section-head"><div><span class="eyebrow">MERIT AI</span><h2>AI Tutor</h2></div>
+        <span class="badge" id="aiBadge">3 free / day</span>
+      </div>
+      <div class="grid-2">
+        <div class="panel">
+          <h3>Ask a question</h3>
+          <p>WAEC/JAMB help — short answers: concept, steps, exam tip.</p>
+          <div class="chat-box" id="tutorChat">Ask a question to start…</div>
+          <div class="chat-input">
+            <textarea id="tutorInput" placeholder="e.g. Solve 2x² − 5x + 3 = 0 and explain the steps"></textarea>
+            <button type="button" class="primary" id="tutorSend">Send</button>
+          </div>
+          <p class="muted-sm" id="tutorStatus"></p>
+        </div>
+        <div class="panel">
+          <h3>Generate 5 questions</h3>
+          <p>Create five fresh practice items for any subject and topic.</p>
+          <div class="field">
+            <label>Exam</label>
+            <select id="genExam">
+              <option>JAMB</option>
+              <option>WAEC</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Subject</label>
+            <select id="genSubject">
+              <option>Mathematics</option>
+              <option>Further Mathematics</option>
+              <option>Physics</option>
+              <option>Chemistry</option>
+              <option>Biology</option>
+              <option>Agricultural Science</option>
+              <option>Use of English</option>
+              <option>Literature-in-English</option>
+              <option>Government</option>
+              <option>Economics</option>
+              <option>Commerce</option>
+              <option>Financial Accounting</option>
+              <option>CRK</option>
+              <option>IRS</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Topic</label>
+            <input id="genTopic" type="text" placeholder="e.g. Quadratic equations, Ohm's law">
+          </div>
+          <div class="field">
+            <label>Difficulty</label>
+            <select id="genDiff">
+              <option value="hard" selected>Hard</option>
+              <option value="medium">Medium</option>
+              <option value="easy">Easy</option>
+            </select>
+          </div>
+          <button type="button" class="primary" id="genBtn" style="width:100%">Generate 5 questions <span>→</span></button>
+          <p class="muted-sm" id="genStatus" style="margin-top:10px"></p>
+        </div>
+      </div>
+      <div class="panel hidden" id="genResultsPanel" style="margin-top:16px">
+        <div class="section-head" style="margin:0 0 12px">
+          <div><span class="eyebrow">AI OUTPUT</span><h3 style="margin:6px 0 0;font-size:18px">Generated set</h3></div>
+          <button type="button" class="secondary" id="genPracticeBtn">Practise these 5</button>
+        </div>
+        <div id="genResults"></div>
+      </div>
+    </section>
+
+    <section id="premiumView" class="view hidden">
+      <div class="section-head"><div><span class="eyebrow">UPGRADE</span><h2>Premium</h2></div>
+        <span class="badge" id="premiumStatusBadge">FREE</span>
+      </div>
+
+      <!-- Featured premium card -->
+      <div class="premium-card" id="premiumCard">
+        <div class="premium-card-top">
+          <div>
+            <span class="badge ok">MOST POPULAR</span>
+            <h3 class="premium-title">MeritScholars Premium</h3>
+            <p class="premium-sub">One-time payment · full access for 90 days · no auto-renewal</p>
+          </div>
+          <div class="premium-price-block">
+            <div class="price-tag">₦2,000</div>
+            <div class="muted-sm">for 90 days</div>
+          </div>
+        </div>
+        <div class="premium-benefits">
+          <div class="benefit"><span class="benefit-icon">📚</span><div><b>Full unique bank</b><small>21,000+ stem-deduped JAMB &amp; WAEC questions</small></div></div>
+          <div class="benefit"><span class="benefit-icon">📝</span><div><b>Longer CBT tests</b><small>Up to 50 questions per session (free is 15)</small></div></div>
+          <div class="benefit"><span class="benefit-icon">✦</span><div><b>More AI tutor</b><small>40 Merit AI messages per day vs 3 on free</small></div></div>
+          <div class="benefit"><span class="benefit-icon">🎯</span><div><b>Smart non-repeat</b><small>Fresh questions until the pool cycles</small></div></div>
+          <div class="benefit"><span class="benefit-icon">▤</span><div><b>Analytics</b><small>Score history &amp; weak-subject insights</small></div></div>
+          <div class="benefit"><span class="benefit-icon">∑</span><div><b>Exam tools</b><small>Calculator &amp; practice utilities included</small></div></div>
+        </div>
+        <div class="premium-pay">
+          <div class="field" style="margin:0;flex:1">
+            <label>Email for payment receipt</label>
+            <input id="payEmail" type="email" placeholder="you@email.com" autocomplete="email">
+          </div>
+          <button type="button" class="primary premium-pay-btn" id="payBtn">Pay ₦2,000 with Paystack <span>→</span></button>
+        </div>
+        <p class="muted-sm" id="payMsg" style="margin-top:12px"></p>
+        <p class="muted-sm">Secure checkout via Paystack. Access starts immediately after successful payment. Renew anytime after 90 days.</p>
+      </div>
+
+      <div class="grid-2" style="margin-top:16px">
+        <div class="panel">
+          <h3>Free vs Premium</h3>
+          <table class="table">
+            <tr><th>Feature</th><th>Free</th><th>Premium</th></tr>
+            <tr><td>Questions / test</td><td>15</td><td>up to 50</td></tr>
+            <tr><td>Bank access</td><td>Sample</td><td>Full unique bank</td></tr>
+            <tr><td>AI tutor / day</td><td>3</td><td>40</td></tr>
+            <tr><td>Duration</td><td>—</td><td>90 days</td></tr>
+            <tr><td>Price</td><td>₦0</td><td>₦2,000 once</td></tr>
+          </table>
+        </div>
+        <div class="panel">
+          <h3>Need help?</h3>
+          <p>Questions about payment or access after paying.</p>
+          <p class="muted-sm">Support: <a id="supportMail" href="#">email</a></p>
+          <button type="button" class="secondary" id="waBtnPremium" style="margin-top:10px">WhatsApp support</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="toolsView" class="view hidden">
+      <div class="section-head"><div><span class="eyebrow">UTILITIES</span><h2>Tools</h2></div></div>
+      <div class="grid-2">
+        <div class="panel calc-wrap">
+          <h3>Calculator</h3>
+          <p class="muted-sm">Does not change the page layout — also available as a floating pad during tests.</p>
+          <input class="calc-display" id="calcDisplay" value="0" readonly>
+          <div class="calc-grid" id="calcGrid"></div>
+        </div>
+        <div class="panel">
+          <h3>Quick links</h3>
+          <div class="tools-row">
+            <button type="button" class="secondary" data-view-jump="tutor">Open AI Tutor</button>
+            <button type="button" class="secondary" data-view-jump="analytics">Open Analytics</button>
+            <button type="button" class="secondary" data-view-jump="premium">Premium</button>
+          </div>
+          <p class="muted-sm" style="margin-top:16px">WhatsApp support: <span id="waLabel">+2349031512760</span></p>
+          <button type="button" class="primary" id="waBtn" style="margin-top:8px">Chat on WhatsApp</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="resultsView" class="view hidden">
+      <div class="section-head"><div><span class="eyebrow">YOUR SESSION</span><h2>Results</h2></div></div>
+      <div id="resultsCard" class="result-card">
+        <div class="empty">Complete a practice session to see your score here.</div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<button type="button" class="fab" id="calcFab" title="Calculator">∑</button>
+<div class="float-calc" id="floatCalc">
+  <div class="float-calc-head"><span>Calculator</span><button type="button" class="secondary" id="calcClose" style="padding:4px 8px">✕</button></div>
+  <input class="calc-display" id="calcDisplay2" value="0" readonly>
+  <div class="calc-grid" id="calcGrid2"></div>
+</div>
+
+<script src="/config.js"></script>
+<script src="/questions-free.js"></script>
+<script src="/app.js"></script>
+</body>
+</html>

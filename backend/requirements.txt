@@ -1,0 +1,2 @@
+# Optional: no packages required (stdlib only).
+# If you prefer FastAPI later: fastapi uvicorn sqlalchemy

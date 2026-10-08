@@ -1,0 +1,16 @@
+{
+  "AGRICULTURAL SCIENCE": "bank/agricultural-science.json",
+  "BIOLOGY": "bank/biology.json",
+  "CHEMISTRY": "bank/chemistry.json",
+  "COMMERCE": "bank/commerce.json",
+  "CRK": "bank/crk.json",
+  "ECONOMICS": "bank/economics.json",
+  "FINANCIAL ACCOUNTING": "bank/financial-accounting.json",
+  "FURTHER MATHEMATICS": "bank/further-mathematics.json",
+  "GOVERNMENT": "bank/government.json",
+  "IRS": "bank/irs.json",
+  "LITERATURE-IN-ENGLISH": "bank/literature-in-english.json",
+  "MATHEMATICS": "bank/mathematics.json",
+  "PHYSICS": "bank/physics.json",
+  "USE OF ENGLISH": "bank/use-of-english.json"
+}

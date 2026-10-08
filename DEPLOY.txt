@@ -1,0 +1,19 @@
+REPLACE GITHUB FOLDER
+=====================
+1. Download/unzip this MeritScholars_GitHub folder
+2. On GitHub: delete ALL files in the repo (or empty the repo)
+3. Upload everything from this folder to the REPO ROOT
+   OR use CMD:
+
+   cd MeritScholars_GitHub
+   git init
+   git add .
+   git commit -m "Full MeritScholars replace"
+   git branch -M main
+   git remote add origin https://github.com/lumeriqdesigns/excellence-cbt-pwa.git
+   git push -u origin main --force
+
+4. Vercel will redeploy automatically if linked
+5. Hard-refresh the live site (clear site data once)
+
+Gemini AI: paste key in config.js → AI_API_KEY
